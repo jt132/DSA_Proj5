@@ -2,8 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <Windows.h>
+#include "processStrings.hpp"
 using namespace std;
-
+/*
 string LCS(string s1, string s2)
 {
     int m = s1.length();
@@ -30,7 +31,7 @@ for (int i = 0; i < (m+1); i++){
         }
         cout << endl;
     }
-  */  
+   
 
     for (int i = 1; i <= m; i++)
     {
@@ -59,7 +60,7 @@ for (int i = 0; i < (m+1); i++){
         }
         cout << endl;
     }
-*/
+
     int index = arr[m][n];
     string lcs(index + 1, '\0');
 
@@ -96,22 +97,22 @@ for (int i = 0; i < (m+1); i++){
 
     return lcs;
 }
+*/
 
 int main()
 {
 
-    ifstream readFile("twoStrings.txt");
-    string s1 = "";
-    string s2 = "";
-    getline(readFile, s1);
-    getline(readFile, s2);
 
-    string lcs = LCS(s1, s2);
+
+    ProcessStrings ps("twoStringsTest.txt");
+    string lcs = ps.constructLcsArr();
     int length = lcs.length()-1;
-
+    
+    ps.print();
+    ps.deleteArr();
     cout << "Length of LCS is " << length << endl;
     cout << "Longest common subsequence is " << lcs << endl;
-
-
+    
+//this is the refactor code
     Sleep(800000);
 }
