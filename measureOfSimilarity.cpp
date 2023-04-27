@@ -7,12 +7,12 @@ using namespace std;
 MeasureOfSimilarity::MeasureOfSimilarity(std::string filename)
 {
     ifstream readFile(filename);
-    int numStrings;
-    vector<string> vec;
     string s1;
+    string num = "";
 
-    readFile >> numStrings;
-    cout << numStrings;
+    getline(readFile, num);
+    int numStrings = stoi(num);
+    cout << numStrings << endl;
 
     for (int i = 0; i < numStrings; i++)
     {
@@ -23,9 +23,21 @@ MeasureOfSimilarity::MeasureOfSimilarity(std::string filename)
 
 void MeasureOfSimilarity::compareSimilarity()
 {
+
+    cout << "print vector: " <<endl;
+    for(int i = 0; i< vec.size(); i++){
+        cout << vec.at(i) << "   ";
+    }
+    for (int i = 0; i < vec.size(); i++){
+        for (int j = 0; j < vec.size()-1; j++){
+           // LCS(vec.at(i), vec.at(j+1));
+
+        }
+    }
+
 }
 
-string MeasureOfSimilarity::LCS(string s1, string s2)
+void MeasureOfSimilarity::LCS(string s1, string s2)
 {
     int m = s1.length();
     int n = s2.length();
@@ -58,7 +70,7 @@ string MeasureOfSimilarity::LCS(string s1, string s2)
         {
             if (m == 0 || n == 0)
             {
-                return 0;
+                cout << "no elements!!!" << endl;
             }
             else if (s1[i - 1] == s2[j - 1])
             {
@@ -70,7 +82,8 @@ string MeasureOfSimilarity::LCS(string s1, string s2)
             }
         }
     }
-
+    int lcsLength = arr[m][n];
+    cout << "this is the lcsLength" << lcsLength << endl;
     // cleans up the array
 
     for (int i = 0; i < (m + 1); i++)

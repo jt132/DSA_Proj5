@@ -10,7 +10,8 @@ using namespace std;
 int main()
 {
 
-    MeasureOfSimilarity mos("multiStrings.txt");
+    MeasureOfSimilarity mos("multiStringsTest.txt");
+    mos.compareSimilarity();
     //LongestCommon lc("twoStrings.txt");
     //string lcs = lc.LCS();
     //int length = lcs.length()-1;
