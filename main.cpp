@@ -100,7 +100,7 @@ for (int i = 0; i < (m+1); i++){
 int main()
 {
 
-    ifstream readFile("twoStrings.txt");
+    ifstream readFile("twoStringsTest.txt");
     string s1 = "";
     string s2 = "";
     getline(readFile, s1);
