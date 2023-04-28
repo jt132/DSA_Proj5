@@ -12,7 +12,6 @@ MeasureOfSimilarity::MeasureOfSimilarity(std::string filename)
 
     getline(readFile, num);
     int numStrings = stoi(num);
-    cout << numStrings << endl;
 
     for (int i = 0; i < numStrings; i++)
     {
@@ -20,32 +19,86 @@ MeasureOfSimilarity::MeasureOfSimilarity(std::string filename)
         vec.push_back(s1);
     }
 }
+double MeasureOfSimilarity::calculateLength(std::string s1, std::string s2)
+{
+    double m = s1.length();
+    double n = s2.length();
+    double lengthDiff = 0;
+    if (m > n)
+    {
+        lengthDiff = n / m;
+    }
+    else
+    {
+        lengthDiff = m / n;
+    }
+    return lengthDiff;
+}
 
 void MeasureOfSimilarity::compareSimilarity()
 {
-
-    cout << "print vector: " <<endl;
-    for(int i = 0; i< vec.size(); i++){
-        cout << vec.at(i) << "   ";
-    }
-    for (int i = 0; i < vec.size(); i++){
-        for (int j = 0; j < vec.size()-1; j++){
-           // LCS(vec.at(i), vec.at(j+1));
-
+    double simValue = 0;
+    double lengthValue;
+    for (int i = 0; i < vec.size(); i++)
+    {
+        if (i == 0)
+        {
+            cout << "   ";
+        }
+        cout << "0" << i + 1 << " ";
+        if (i == vec.size() - 1)
+        {
+            cout << endl;
         }
     }
 
+    for (int i = 0; i < vec.size(); i++)
+    {
+
+        int j = 0;
+        cout << "0" << i + 1 << "  ";
+        for (j = 0; j < vec.size(); j++)
+        {
+
+            if (i >= j)
+            {
+                cout << "-  ";
+                continue;
+            }
+            simValue = LCS(vec.at(i), vec.at(j));
+            lengthValue = calculateLength(vec.at(i), vec.at(j));
+            if (simValue >= .9 &&  lengthValue >= .9 )
+            {
+                cout << "H  ";
+            }
+            else if (simValue >= .8 && lengthValue >= .8)
+            {
+                cout << "M  ";
+            }
+            else if (simValue >= .5 && lengthValue >= .6)
+            {
+                cout << "L  ";
+            }
+            else
+            {
+                cout << "D  ";
+            }
+        }
+        cout << endl;
+    }
 }
 
-void MeasureOfSimilarity::LCS(string s1, string s2)
+double MeasureOfSimilarity::LCS(string s1, string s2)
 {
     int m = s1.length();
     int n = s2.length();
     int longer = 0;
-    if(s1.length() > s2.length()){
+    if (s1.length() > s2.length())
+    {
         longer = s2.length();
     }
-    else{
+    else
+    {
         longer = s1.length();
     }
     // 2D array has been declared and initialized
@@ -83,12 +136,14 @@ void MeasureOfSimilarity::LCS(string s1, string s2)
         }
     }
     int lcsLength = arr[m][n];
-    cout << "this is the lcsLength" << lcsLength << endl;
-    // cleans up the array
+    double percentOfTotal;
+    percentOfTotal = (double(lcsLength) / double(longer));
 
     for (int i = 0; i < (m + 1); i++)
     {
         delete[] arr[i];
     }
     delete[] arr;
+
+    return percentOfTotal;
 }
